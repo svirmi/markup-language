@@ -16,9 +16,9 @@ fn machine_cycle(state: State, c: char) -> (Option<char>, State) {
         (Comment, '#') => (None, Normal),
         (Comment, other) => (None, Comment),
         (Upper, '^') => (None, Normal),
-        (Upper, other) => (Some(___), Upper),
+        (Upper, other) => (Some(other.to_ascii_uppercase()), Upper),
         (Lower, '_') => (None, Normal),
-        (Lower, other) => (Some(___), Lower),
+        (Lower, other) => (Some(other.to_ascii_lowercase()), Lower),
     }
 }
 
