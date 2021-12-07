@@ -1,13 +1,19 @@
-// text transforms
+#[derive(Copy, Clone)]
 enum State {
     Normal,
     Comment,
     Upper,
-    Lower
-}
+    Lower,
+} // text transforms
 
-fn machine_cycle(state: &MachineState, c: char) -> (Option<char>, MachineState) {
-    
+fn machine_cycle(state: State, c: char) -> (Option<char>, MachineState) {
+    use self::State::*;
+    match state {
+        Normal => {}
+        Comment => {}
+        Upper => {}
+        Lower => {}
+    }
 }
 
 fn main() {
