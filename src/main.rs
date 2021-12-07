@@ -8,19 +8,11 @@ enum State {
 
 fn machine_cycle(state: State, c: char) -> (Option<char>, State) {
     use self::State::*;
-    match state {
-        Normal => match c {
-            '#' => (None, Comment),
-            '^' => (None, Upper),
-            '_' => (None, Lower),
-            other => (Some(other), Normal),
-        },
-        Comment => match c {
-            '#' => (None, Normal),
-            other => (None, Other),
-        },
-        Upper => match c {},
-        Lower => match c {},
+    match (state, c) {
+        (Normal, '#') => (None, Comment),
+        (Normal, '^') => (None, Upper),
+        (Normal, '_') => (None, Lower),
+        (Normal, other) => (Some(other), Normal),
     }
 }
 
