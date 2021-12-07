@@ -14,7 +14,7 @@ fn machine_cycle(state: State, c: char) -> (Option<char>, State) {
         (Normal, '_') => (None, Lower),
         (Normal, other) => (Some(other), Normal),
         (Comment, '#') => (None, Normal),
-        (Comment, other) => (None, Comment),
+        (Comment, _) => (None, Comment),
         (Upper, '^') => (None, Normal),
         (Upper, other) => (Some(other.to_ascii_uppercase()), Upper),
         (Lower, '_') => (None, Normal),
@@ -23,5 +23,18 @@ fn machine_cycle(state: State, c: char) -> (Option<char>, State) {
 }
 
 fn main() {
-    println!("Hello, world!");
+    let input = "Process _AND_ transform _Me_ string ^example^. # this comment will be stripped #";
+
+    let mut state = State::Normal;
+    let mut processed_string = String::new();
+
+    for character in input.chars() {
+        let (output, new_state) = machine_cycle(state, character);
+        if let Some(c) = output {
+            processed_string.push(c);
+        }
+        state = new_state;
+    }
+
+    println!("{}", processed_string);
 }
