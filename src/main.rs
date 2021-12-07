@@ -13,6 +13,12 @@ fn machine_cycle(state: State, c: char) -> (Option<char>, State) {
         (Normal, '^') => (None, Upper),
         (Normal, '_') => (None, Lower),
         (Normal, other) => (Some(other), Normal),
+        (Comment, '#') => (None, Normal),
+        (Comment, other) => (None, Comment),
+        (Upper, '^') => (None, Normal),
+        (Upper, other) => (Some(___), Upper),
+        (Lower, '_') => (None, Normal),
+        (Lower, other) => (Some(___), Lower),
     }
 }
 
